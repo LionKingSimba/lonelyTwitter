@@ -15,15 +15,20 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.ToggleButton;
 
 public class LonelyTwitterActivity extends Activity {
 
 	private static final String FILENAME = "file.sav";
 	private EditText bodyText;
 	private ListView oldTweetsList;
-	
+
+    private CheckBox happy;
+    private CheckBox sad;
+
 	/** Called when the activity is first created. */
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -40,10 +45,11 @@ public class LonelyTwitterActivity extends Activity {
 				setResult(RESULT_OK);
 				String text = bodyText.getText().toString();
 				saveInFile(text, new Date(System.currentTimeMillis()));
-				finish();
-
 			}
 		});
+
+        this.happy = (CheckBox) findViewById(R.id.happybox);
+        this.sad = (CheckBox) findViewById(R.id.sadbox);
 	}
 
 	@Override
@@ -81,7 +87,15 @@ public class LonelyTwitterActivity extends Activity {
 		try {
 			FileOutputStream fos = openFileOutput(FILENAME,
 					Context.MODE_APPEND);
-			fos.write(new String(date.toString() + " | " + text)
+            String tweet = new String(date.toString() + " | " + text);
+            if (this.happy.isChecked()) {
+                tweet = tweet.concat(" happy");
+            }
+            if (this.sad.isChecked()) {
+                tweet = tweet.concat(" sad");
+            }
+            tweet.concat("\\n");
+			fos.write(new String(tweet)
 					.getBytes());
 			fos.close();
 		} catch (FileNotFoundException e) {
