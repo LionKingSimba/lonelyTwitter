@@ -12,7 +12,7 @@ import static android.R.attr.tag;
 
 public abstract class Mood {
 
-    private Date date;
+    protected Date date;
 
     public Mood() {
         this.date = new Date();

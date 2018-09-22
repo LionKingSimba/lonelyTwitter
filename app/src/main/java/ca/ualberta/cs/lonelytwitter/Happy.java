@@ -10,19 +10,17 @@ import java.util.Date;
 
 public class Happy extends Mood {
 
-    private String mood;
-
     public Happy() {
         super();
-        Log.d("date", "I am happy");
+        Log.d("date", this.format());
     }
 
     public Happy(Date date) {
         super(date);
-        Log.d("date", "I am happy");
+        Log.d("date", this.format());
     }
 
     public String format() {
-        return this.mood;
+        return "Happy";
     }
 }

@@ -26,9 +26,6 @@ public class LonelyTwitterActivity extends Activity {
 	private EditText bodyText;
 	private ListView oldTweetsList;
 
-    private CheckBox happy;
-    private CheckBox sad;
-
 	/** Called when the activity is first created. */
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -47,9 +44,6 @@ public class LonelyTwitterActivity extends Activity {
 				saveInFile(text, new Date(System.currentTimeMillis()));
 			}
 		});
-
-        this.happy = (CheckBox) findViewById(R.id.happybox);
-        this.sad = (CheckBox) findViewById(R.id.sadbox);
 	}
 
 	@Override
@@ -88,13 +82,6 @@ public class LonelyTwitterActivity extends Activity {
 			FileOutputStream fos = openFileOutput(FILENAME,
 					Context.MODE_APPEND);
             String tweet = new String(date.toString() + " | " + text);
-            if (this.happy.isChecked()) {
-                tweet = tweet.concat(" happy");
-            }
-            if (this.sad.isChecked()) {
-                tweet = tweet.concat(" sad");
-            }
-            tweet.concat("\\n");
 			fos.write(new String(tweet)
 					.getBytes());
 			fos.close();
