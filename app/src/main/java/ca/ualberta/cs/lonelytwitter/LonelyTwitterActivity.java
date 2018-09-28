@@ -62,6 +62,15 @@ public class LonelyTwitterActivity extends Activity {
 
 			}
 		});
+
+//		Button clearButton = (Button) findViewById(R.id.clear);
+//        clearButton.setOnClickListener(new View.OnClickListener() {
+//            public void onClick(View v) {
+//                tweets.clear();
+//                clearFile();
+//                adapter.notifyDataSetChanged();
+//            }
+//        });
 	}
 
 	@Override
@@ -113,4 +122,23 @@ public class LonelyTwitterActivity extends Activity {
 			e.printStackTrace();
 		}
 	}
+
+	private void clearFile() {
+	    try {
+            FileOutputStream fos = openFileOutput(FILENAME, 0);
+            OutputStreamWriter osw = new OutputStreamWriter(fos);
+            BufferedWriter writer = new BufferedWriter(osw);
+            Gson gson = new Gson();
+            gson.toJson(tweets, writer);
+            writer.flush();
+            writer.close();
+            fos.close();
+        } 	catch (FileNotFoundException e) {
+        // TODO Auto-generated catch block
+        e.printStackTrace();
+        } catch (IOException e) {
+        // TODO Auto-generated catch block
+        e.printStackTrace();
+    }
+    }
 }
