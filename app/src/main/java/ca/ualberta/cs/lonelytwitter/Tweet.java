@@ -9,11 +9,11 @@ public abstract class Tweet {
     protected ArrayList<Mood> moods;
 
     public void setMessage(String message) throws TooLongTweetException{
+        this.message=message;
 
         if(this.message.length()>140){
             throw new TooLongTweetException();
         }
-        this.message=message;
     }
 
     public void setDate(Date date){
@@ -38,4 +38,8 @@ public abstract class Tweet {
 
     public abstract Boolean isImportant();
 
+    @Override
+    public String toString(){
+        return (this.date.toString()+" | "+this.message);
+    }
 }
